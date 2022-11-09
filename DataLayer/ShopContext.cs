@@ -15,13 +15,16 @@ namespace DataLayer
         public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<Country> Countries { get; set; }
 
+        public ShopContext() : base(new DbContextOptionsBuilder().Options) { }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public ShopContext(DbContextOptions options) : base(options) { }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            optionsBuilder
-                .LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name }, LogLevel.Information)
-                .EnableSensitiveDataLogging(true)
-                .UseSqlServer("Server = (localdb)\\mssqllocaldb; Database = WebShopDb; Trusted_Connection = True; ");
+            if (!builder.IsConfigured)
+            {
+                builder.UseSqlServer("Server = (localdb)\\mssqllocaldb; Database = WebShopDb; Trusted_Connection = True;");
+            }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -142,12 +145,12 @@ namespace DataLayer
                 );
             modelBuilder.Entity<ProductImage>()
             .HasData(
-                new ProductImage { ProductImageId = 1, Caption = "Sony Bravia XR", Image = File.ReadAllBytes("C:\\Users\\Rene\\source\\repos\\WebShopProject\\WebApp\\wwwroot\\img\\sony_bravia_xr.jpg") },
-                new ProductImage { ProductImageId = 2, Caption = "AMD Ryzen 5 7700X", Image = File.ReadAllBytes("C:\\Users\\Rene\\source\\repos\\WebShopProject\\WebApp\\wwwroot\\img\\ryzen_7700x.jpg") },
-                new ProductImage { ProductImageId = 3, Caption = "Intel i7 13700K", Image = File.ReadAllBytes("C:\\Users\\Rene\\source\\repos\\WebShopProject\\WebApp\\wwwroot\\img\\i7_13700k.jpg") },
-                new ProductImage { ProductImageId = 4, Caption = "Dell Latitude 5530", Image = File.ReadAllBytes("C:\\Users\\Rene\\source\\repos\\WebShopProject\\WebApp\\wwwroot\\img\\latitude_5530.jpg") },
-                new ProductImage { ProductImageId = 5, Caption = "Bosch Serie 6", Image = File.ReadAllBytes("C:\\Users\\Rene\\source\\repos\\WebShopProject\\WebApp\\wwwroot\\img\\bosch_serie_6.jpg") },
-                new ProductImage { ProductImageId = 6, Caption = "Samsung EcoBubble", Image = File.ReadAllBytes("C:\\Users\\Rene\\source\\repos\\WebShopProject\\WebApp\\wwwroot\\img\\samsung_ecobubble.jpg") }
+                new ProductImage { ProductImageId = 1, Caption = "Sony Bravia XR", ImagePath = "C:\\Users\\Rene\\source\\repos\\WebshopProject\\BlazorWebApp\\wwwroot\\img\\sony_bravia_xr.jpg" },
+                new ProductImage { ProductImageId = 2, Caption = "AMD Ryzen 5 7700X", ImagePath = "C:\\Users\\Rene\\source\\repos\\WebShopProject\\WebApp\\wwwroot\\img\\ryzen_7700x.jpg" },
+                new ProductImage { ProductImageId = 3, Caption = "Intel i7 13700K", ImagePath = "C:\\Users\\Rene\\source\\repos\\WebShopProject\\WebApp\\wwwroot\\img\\i7_13700k.jpg" },
+                new ProductImage { ProductImageId = 4, Caption = "Dell Latitude 5530", ImagePath = "C:\\Users\\Rene\\source\\repos\\WebShopProject\\WebApp\\wwwroot\\img\\latitude_5530.jpg" },
+                new ProductImage { ProductImageId = 5, Caption = "Bosch Serie 6", ImagePath = "C:\\Users\\Rene\\source\\repos\\WebShopProject\\WebApp\\wwwroot\\img\\bosch_serie_6.jpg" },
+                new ProductImage { ProductImageId = 6, Caption = "Samsung EcoBubble", ImagePath = "C:\\Users\\Rene\\source\\repos\\WebShopProject\\WebApp\\wwwroot\\img\\samsung_ecobubble.jpg" }
                 );
             #endregion
 

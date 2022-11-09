@@ -32,7 +32,6 @@ namespace DataLayer.Entities
         public string Name { get; set; }
         public float Price { get; set; }
         public DateTime CreatedDate { get; set; }
-        public bool IsComplete { get; set; }
 
         public ProductImage ProductImages { get; set; }
         public Country Country { get; set; }

@@ -3,7 +3,7 @@ using DataLayer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using ServiceLayer.Interfaces;
+using ServiceLayer.Products;
 
 namespace WebApp.Pages.Products
 {
@@ -21,10 +21,10 @@ namespace WebApp.Pages.Products
             _productService = productService;
         }
 
-        public void OnGet()
-        {
-            Products = _productService.GetProductByName(SearchQuery).AsNoTracking();
-        }
+        //public void OnGet()
+        //{
+        //    Products = _productService.GetProductByName(SearchQuery).AsNoTracking();
+        //}
 
     }
 }

@@ -1,0 +1,17 @@
+﻿@using BlazorWebApp.Models
+@inject NavigationManager Nav
+
+<div class="card">
+    <img class="card-img-top ProdImage" src="@( Nav.BaseUri + "api/image/" + ProductModel.ProductId + "/1")" alt="@ProductModel.ProductName" />
+    <div class="card-body">
+        @*<h5 class="card-title"><button class="btn btn-link p-0" @onclick="GotoProduct">@ProductModel.Name</button></h5>*@
+        <p class="card-text">@ProductModel.Price</p>
+        @*<button @onclick="AddToBasket" class="btn btn-success"><i class="fas fa-shopping-basket"></i> Add</button>*@
+        @*<button @onclick='() => Nav.NavigateTo($"/product/edit/{ProductModel.ProductId}")' class="btn btn-primary"><i class="fas fa-edit"></i> Edit</button>*@
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public ProductModel ProductModel { get; set; }
+}

@@ -1,0 +1,69 @@
+﻿@page "/calculator"
+
+<PageTitle>Calculator</PageTitle>
+
+<h1>Calculator</h1>
+
+
+<p>
+    <label>
+        Value one:
+        <input class="form-control" @bind="Value1" @bind:event="oninput" />
+    </label>
+</p>
+<p>
+    <label>
+        Value two:
+        <input class="form-control" @bind="Value2" @bind:event="oninput" />
+    </label>
+</p>
+<button class="btn btn-primary" @onclick=Addition>Add</button>
+<button class="btn btn-primary" @onclick=Subtraction>Subtract</button>
+<button class="btn btn-primary" @onclick=Multiplication>Multiply</button>
+<button class="btn btn-primary" @onclick=Division>Divide</button>
+<hr />
+<p>
+    <label>
+        <label style="font-size: 16px">Result:</label>
+        <input class="form-control" @bind="Result" @bind:event="oninput" style="font-size: 20px" disabled />
+    </label>
+</p>
+
+@code {
+    private string? Value1 { get; set; }
+
+    private string? Value2 { get; set; }
+
+    private string?Result { get; set; }
+
+    //Add two numbers
+    private void Addition(){
+        Result = (Convert.ToDecimal(Value1) + Convert.ToDecimal(Value2)).ToString();
+    }
+
+    //Subtract two numbers
+    private void Subtraction()
+    {
+        Result = (Convert.ToDecimal(Value1) - Convert.ToDecimal(Value2)).ToString();
+
+    }
+
+    //Multiply two numbers
+    private void Multiplication()
+    {
+        Result = (Convert.ToDecimal(Value1) * Convert.ToDecimal(Value2)).ToString();
+    }
+
+    //Divide Value1 by Value2
+    private void Division()
+    {
+        //checks if either value is zero
+        if (Convert.ToDecimal(Value1) == 0 || Convert.ToDecimal(Value2) == 0)
+        {
+            throw new DivideByZeroException();
+        }
+
+        //return divided result if no exception is thrown
+        Result = (Convert.ToDecimal(Value1) / Convert.ToDecimal(Value2)).ToString();
+    }
+}

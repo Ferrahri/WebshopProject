@@ -2,7 +2,7 @@ using DataLayer.Entities;
 using DataLayer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ServiceLayer.Interfaces;
+using ServiceLayer.Products;
 
 namespace WebApp.Pages.Products
 {
@@ -17,9 +17,9 @@ namespace WebApp.Pages.Products
             _productService = productService;
         }
 
-        public void OnGet(int productId)
-        {
-            Products = _productService.GetProductById(productId);
-        }
+        //public void OnGet(int productId)
+        //{
+        //    Products = _productService.GetProductById(productId);
+        //}
     }
 }

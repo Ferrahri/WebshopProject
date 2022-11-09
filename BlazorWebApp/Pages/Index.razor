@@ -1,0 +1,38 @@
+﻿@page "/"
+@using BlazorWebApp.Models
+@using BlazorWebApp.Components
+@inject HttpClient client
+@inject NavigationManager Nav
+
+@*<button @onclick='() => Nav.NavigateTo($"/product/create")' class="btn btn-primary"><i class="fas fa-plus"></i> Create</button>*@
+
+<div class="row">
+    @if (Products != null)
+    {
+        @foreach (var item in Products)
+        {
+            <div class="col-4 mt-1 mb-1">
+                @item.ProductName
+            </div>
+        }
+    }
+    else
+    {
+       <Loading Text="Loading..."/>
+    }
+</div>
+
+@code{
+
+    [CascadingParameter] public MainLayout MainLayout { get; set; }
+
+    private List<ProductModel> Products { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        Products = await client.GetFromJsonAsync<List<ProductModel>>("/all");
+
+        await base.OnInitializedAsync();
+    }
+
+}

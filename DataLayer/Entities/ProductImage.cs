@@ -13,7 +13,11 @@ namespace DataLayer.Entities
         public int ProductImageId { get; set; }
 
         public string Caption { get; set; }
-        public byte[] Image { get; set; }
+
+        public string ImagePath { get; set; }
+
+        // using image path method to wwwroot instead
+        //public byte[] Image { get; set; }
 
         public virtual List<Product> Product { get; set; }
     }

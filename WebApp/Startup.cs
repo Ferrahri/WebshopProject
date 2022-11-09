@@ -1,6 +1,5 @@
 ﻿using DataLayer;
-using ServiceLayer.Interfaces;
-using ServiceLayer.Services;
+using ServiceLayer.Products;
 
 namespace WebApp
 {
