@@ -23,6 +23,7 @@ namespace ServiceLayer
                            ProductId = p.ProductId,
                            ProductName = p.Name,
                            BrandName = p.Brand.Name,
+                           ProductType = p.ProductType.Name,
                            Price = p.Price,
                            ProductImagePath = p.ProductImages.ImagePath,
                            Category = p.Category.Name,

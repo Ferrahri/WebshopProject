@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using ServiceLayer.Products;
-using System.Net.Mail;
 
 namespace WebApi
 {

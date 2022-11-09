@@ -1,8 +1,4 @@
-using DataLayer;
-using DataLayer.Entities;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using ServiceLayer.Dto;
 using ServiceLayer.Products;
 
@@ -21,18 +17,20 @@ namespace API.Controllers
 
         [HttpGet]
 
-        [HttpGet]
-        [Route("/all")]
-        public async Task<List<ProductDto>> GetProducts()
-        {
-            return await _ProductService.GetProductsAsync();
-        }
+
 
         [HttpGet]
         [Route("/{id}")]
         public async Task<ProductDto> GetProduct(int id)
         {
             return await _ProductService.GetProductAsync(id);
+        }
+
+        [HttpGet]
+        [Route("/all")]
+        public async Task<List<ProductDto>> GetProducts()
+        {
+            return await _ProductService.GetProductsAsync();
         }
 
         //[HttpGet]
