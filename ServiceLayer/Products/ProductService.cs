@@ -1,5 +1,4 @@
 ﻿using DataLayer;
-using DataLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 using ServiceLayer.Dto;
 
@@ -8,29 +7,25 @@ namespace ServiceLayer.Products
     public class ProductService : IProductService
     {
 
-        public DataLayer.ShopContext _ctx;
+        public ShopContext _ctx;
 
         public ProductService(ShopContext context)
         {
             _ctx = context;
         }
 
-
-
         public Task<ProductDto> GetProductAsync(int id)
         {
             return _ctx.Products
                             .Where(p => p.ProductId == id)
-                            .ToDto()
+                            .ConvertToDto()
                             .FirstOrDefaultAsync();
         }
-
-
 
         public async Task<List<ProductDto>> GetProductsAsync()
         {
             return await _ctx.Products
-                .ToDto()
+                .ConvertToDto()
                 .ToListAsync();
         }
 
@@ -48,6 +43,7 @@ namespace ServiceLayer.Products
         {
             throw new NotImplementedException();
         }
+        
         //basic search, can only search by PRODUCT NAME only for now, brand later
         //public IQueryable<Product> GetProductByName(string? name = null)
         //{

@@ -4,7 +4,7 @@ using ServiceLayer.Products;
 
 namespace API.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -15,38 +15,29 @@ namespace API.Controllers
             _ProductService = productService;
         }
 
-        [HttpGet]
-
-
-
-        [HttpGet]
         [Route("/{id}")]
+
+        [HttpGet]
         public async Task<ProductDto> GetProduct(int id)
         {
             return await _ProductService.GetProductAsync(id);
         }
 
-        [HttpGet]
         [Route("/all")]
+        [HttpGet]
         public async Task<List<ProductDto>> GetProducts()
         {
             return await _ProductService.GetProductsAsync();
         }
 
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<Product>>> GetTodoItems()
-        //{
-        //    return await _context.Products
-        //        .ToListAsync();
-        //}
 
         //[HttpDelete("{id}")]
         //public async Task<IActionResult> DeleteProduct(int id)
         //{
-        //    var product_to_delete = await _context.Products.FindAsync(id);
+        //    var product_to_delete = await _ProductService.Products.FindAsync(id);
         //    if (product_to_delete == null)
         //    {
-        //        return NotFound();
+        //        return NotFound("No product with that Id was found.");
         //    }
 
         //    _context.Products.Remove(product_to_delete);
@@ -67,5 +58,21 @@ namespace API.Controllers
 
         //    return product_to_get_by_id;
         //}
+
+        [Route("create")]
+        [HttpPost]
+        public async Task<IActionResult> CreateProduct(ProductDto product)
+        {
+            try
+            {
+                await _ProductService.CreateProductAsync(product);
+                return Ok("Product created");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
     }
 }

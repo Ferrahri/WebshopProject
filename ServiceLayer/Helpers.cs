@@ -11,7 +11,7 @@ namespace ServiceLayer
 {
     public static class DtoHelpers
     {
-        public static IQueryable<ProductDto> ToDto(this IQueryable<Product> products)
+        public static IQueryable<ProductDto> ConvertToDto(this IQueryable<Product> products)
         {
             return products
                        .Include(p => p.Brand)
@@ -28,6 +28,7 @@ namespace ServiceLayer
                            ProductImagePath = p.ProductImages.ImagePath,
                            Category = p.Category.Name,
                            CountryName = p.Country.Name,
+                           ImageCaption = p.ProductImages.Caption,
                        });
         }
     }

@@ -1,0 +1,44 @@
+﻿@page "/products/details/{ProductId:int}"
+@using BlazorWebApp.Models;
+@using BlazorWebApp.Components;
+@inject NavigationManager nav;
+
+@inject HttpClient client
+
+@if (product != null)
+{
+    <div class="row">
+        <div class="col-6">
+        </div>
+        <div class="col-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h1>@product.BrandName @product.ProductName</h1>
+                    <p>Product Category: @product.Category</p>
+                    <p>Type of Product: @product.ProductType</p>
+                    <p>Country of Origin: @product.CountryName</p>
+                    <h2>@product.Price Kr.</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <Loading Text="Loading Product...."/>
+}
+
+
+@code {
+    [Parameter]
+    public int ProductId { get; set; }
+
+    private ProductModel product { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        product = await client.GetFromJsonAsync<ProductModel>($"{ProductId}");
+        await base.OnInitializedAsync();
+    }
+
+}

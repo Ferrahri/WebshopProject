@@ -15,7 +15,7 @@ namespace ServiceLayer.Dto
         public string Caption { get; set; }
 
         // using image path method to wwwroot instead
-        //public byte[] Image { get; set; }
+        // public byte[] Image { get; set; } if converting from db bytestring
         public string ImagePath { get; set; }   
     }
 }
