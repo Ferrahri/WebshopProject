@@ -7,7 +7,8 @@
     </div>
     <div class="card-body">
         <p class="card-text">@ProductModel.Price Kr.</p>
-        <button @onclick='() => Nav.NavigateTo($"/products/details/{ProductModel.ProductId}")' class="btn btn-secondary">Info</button>
+        <button @onclick='() => Nav.NavigateTo($"/products/details/{ProductModel.ProductId}")' class="btn btn-primary">Info</button>
+        <button @onclick='() => Nav.NavigateTo($"/product/edit/{ProductModel.ProductId}")' class="btn btn-primary">Edit</button>
     </div>
 </div>
 

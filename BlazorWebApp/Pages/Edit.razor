@@ -1,0 +1,59 @@
+﻿@page "/product/edit/{ProductId:int}"
+@inject NavigationManager Nav
+@using BlazorWebApp.Models
+<h3>EditProduct</h3>
+
+<EditForm EditContext="@EditedContext" OnValidSubmit="@OnValidSubmit">
+    <ValidationSummary></ValidationSummary>
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+
+    <div class="form-group">
+        <label for="InputName">Product Name</label>
+        <input type="text" class="form-control" @bind-value="my_form.Name" placeholder="enter name" />
+    </div>
+
+    <div class="form-group">
+        <label for="InputName">Product Price</label>
+        <input type="number" class="form-control" @bind-value="my_form.Price" placeholder="enter product price">
+    </div>
+
+    <button type="submit" class="btn btn-success">Edit</button>
+</EditForm>
+
+@code {
+    [Inject] private HttpClient client { get; set; }
+
+    [Parameter] public int ProductId { get; set; }
+
+    public string ErrorMessage { get; set; }
+
+    private ValidationForm my_form { get; set; } = new();
+    private EditContext EditedContext;
+
+    // struggling to get this to work same issues as create product.
+    protected override async Task OnInitializedAsync()
+    {
+        var product = await client.GetFromJsonAsync<ProductModel>($"product/{ProductId}");
+        await base.OnInitializedAsync();
+        my_form.Id = product.ProductId;
+        my_form.Name = product.ProductName;
+        my_form.Price = product.Price;
+        EditedContext = new(my_form);
+    }
+
+    public async Task OnValidSubmit()
+    {
+        var response = await client.PutAsJsonAsync<ValidationForm>("product", form);
+
+        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+        {
+            Nav.NavigateTo("/home");
+        }
+        else
+        {
+            ErrorMessage = $"{response.StatusCode} - {response.ReasonPhrase}";
+        }
+    }
+
+
+}

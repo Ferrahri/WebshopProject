@@ -15,9 +15,13 @@
                 <div class="card-body">
                     <h1>@product.BrandName @product.ProductName</h1>
                     <p>Product Category: @product.Category</p>
+                    <p>Brand: @product.BrandName</p>
                     <p>Type of Product: @product.ProductType</p>
                     <p>Country of Origin: @product.CountryName</p>
                     <h2>@product.Price Kr.</h2>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary">Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -40,5 +44,4 @@ else
         product = await client.GetFromJsonAsync<ProductModel>($"{ProductId}");
         await base.OnInitializedAsync();
     }
-
 }

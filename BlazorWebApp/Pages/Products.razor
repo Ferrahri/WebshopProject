@@ -4,7 +4,7 @@
 @inject HttpClient client
 @inject NavigationManager nav
 
-@*<button @onclick='() => Nav.NavigateTo($"/product/create")' class="btn btn-primary"><i class="fas fa-plus"></i> Create</button>*@
+<button @onclick='() => nav.NavigateTo($"/product/create")' class="btn btn-primary">Create new Product</button>
 
 <div class="row">
     @if (ProductItems != null)
@@ -23,7 +23,7 @@
     else
     {
         // loading component
-        <Loading Text="Loading..." />
+        <Loading Text="Loading products..." />
     }
 </div>
 

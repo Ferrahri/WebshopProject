@@ -17,7 +17,5 @@ namespace ServiceLayer.Products
         public Task CreateProductAsync(ProductDto product);
 
         public Task EditProductAsync(ProductDto product);
-
-        public Task<ProductImageDto> GetProductImageAsync(int productId, int ImageNumber);
     }
 }

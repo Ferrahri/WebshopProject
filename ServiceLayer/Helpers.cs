@@ -14,22 +14,22 @@ namespace ServiceLayer
         public static IQueryable<ProductDto> ConvertToDto(this IQueryable<Product> products)
         {
             return products
-                       .Include(p => p.Brand)
-                       .Include(p => p.Country)
-                       .Include(p => p.Category)
-                       .Include(p => p.ProductImages)
-                       .Select(p => new ProductDto()
-                       {
-                           ProductId = p.ProductId,
-                           ProductName = p.Name,
-                           BrandName = p.Brand.Name,
-                           ProductType = p.ProductType.Name,
-                           Price = p.Price,
-                           ProductImagePath = p.ProductImages.ImagePath,
-                           Category = p.Category.Name,
-                           CountryName = p.Country.Name,
-                           ImageCaption = p.ProductImages.Caption,
-                       });
+                .Include(p => p.Brand)
+                .Include(p => p.Country)
+                .Include(p => p.Category)
+                .Include(p => p.ProductImages)
+                .Select(p => new ProductDto()
+                {
+                    ProductId = p.ProductId,
+                    ProductName = p.Name,
+                    BrandName = p.Brand.Name,
+                    ProductType = p.ProductType.Name,
+                    Price = p.Price,
+                    ProductImagePath = p.ProductImages.ImagePath,
+                    Category = p.Category.Name,
+                    CountryName = p.Country.Name,
+                    ImageCaption = p.ProductImages.Caption,
+                });
         }
     }
 }

@@ -31,42 +31,36 @@ namespace API.Controllers
         }
 
 
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteProduct(int id)
-        //{
-        //    var product_to_delete = await _ProductService.Products.FindAsync(id);
-        //    if (product_to_delete == null)
-        //    {
-        //        return NotFound("No product with that Id was found.");
-        //    }
+        [HttpDelete("delete/{id}")]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            return NoContent();
+        }
 
-        //    _context.Products.Remove(product_to_delete);
-        //    await _context.SaveChangesAsync();
 
-        //    return NoContent();
-        //}
-
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Product>> GetProduct(int id)
-        //{
-        //    var product_to_get_by_id = await _context.Products.FindAsync(id);
-
-        //    if (product_to_get_by_id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return product_to_get_by_id;
-        //}
-
-        [Route("create")]
+        //validation works but the post to route doesnt seem to go through
+        [Route("/product/create")]
         [HttpPost]
         public async Task<IActionResult> CreateProduct(ProductDto product)
         {
             try
             {
                 await _ProductService.CreateProductAsync(product);
-                return Ok("Product created");
+                return Ok("Create success!");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> EditProduct(ProductDto product)
+        {
+            try
+            {
+                await _ProductService.EditProductAsync(product);
+                return Ok("product edit success");
             }
             catch (Exception e)
             {
